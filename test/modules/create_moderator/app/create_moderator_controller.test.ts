@@ -24,7 +24,7 @@ describe("Testing Create Moderator Controller", () => {
             queryStringParameters: {}
         }));
 
-        // expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(201);
         expect(response.body.message).toBe("Moderator created successfully");
     });
 

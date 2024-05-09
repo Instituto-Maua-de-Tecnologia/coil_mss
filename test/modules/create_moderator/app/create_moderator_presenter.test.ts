@@ -22,7 +22,7 @@ describe("Testing Create Moderator Presenter", () => {
             body: JSON.stringify(user_moderator)
         }, null);
 
-        // expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(201);
         expect(JSON.parse(response.body).message).toBe("Moderator created successfully");    
     });
 
