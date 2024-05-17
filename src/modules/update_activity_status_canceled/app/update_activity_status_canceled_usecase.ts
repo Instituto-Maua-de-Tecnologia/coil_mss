@@ -1,4 +1,4 @@
-import { UserNotAllowed, InvalidRequest, MissingParameter, UserNotAuthenticated } from "../../../core/helpers/errors/ModuleError";
+import { UserNotAllowed, InvalidRequest, MissingParameter, UserNotAuthenticated, NotfoundError } from "../../../core/helpers/errors/ModuleError";
 import { IUserRepo } from "../../../core/repositories/interfaces/IUserRepo";
 import { IActivityRepo } from "../../../core/repositories/interfaces/IActivityRepo";
 import { TokenAuth } from "../../../core/helpers/functions/token_auth";
@@ -32,9 +32,7 @@ class UpdateActivityStatusCanceledUsecase {
 
     const user_id = await this.token_auth
       .decode_token(headers.Authorization)
-      .then((response) => {
-        return response;
-      })
+      .then((response) => response)
       .catch((error) => {
         throw new UserNotAuthenticated("Invalid or expired token");
       });
@@ -51,7 +49,7 @@ class UpdateActivityStatusCanceledUsecase {
 
     const activity = await this.activity_repo.get_activity(body.activity_id);
     if (!activity) {
-      throw new Error("Activity not found");
+      throw new NotfoundError("Activity not found");
     }
 
     activity.status_activity = ActivityStatusEnum.CANCELED;
