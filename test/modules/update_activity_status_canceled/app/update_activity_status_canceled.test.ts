@@ -18,7 +18,10 @@ describe("Update Activity Status Canceled Presenter", () => {
         Authorization: token,
       },
       body: JSON.stringify({
-        activity_id: activity.id,
+        body: {
+          activity_id: activity.id,
+        },
+        queryStringParameters: {}
       }),
     };
     const response = await handler(event);
@@ -33,7 +36,10 @@ describe("Update Activity Status Canceled Presenter", () => {
         Authorization: token,
       },
       body: JSON.stringify({
-        activity_id: "invalid_id",
+        body: {
+          activity_id: "invalid_id",
+        },
+        queryStringParameters: {}
       }),
     };
     const response = await handler(event);
@@ -50,7 +56,10 @@ describe("Update Activity Status Canceled Presenter", () => {
         Authorization: token,
       },
       body: JSON.stringify({
-        activity_id: activity.id,
+        body: {
+          activity_id: activity.id,
+        },
+        queryStringParameters: {}
       }),
     };
     const response = await handler(event);
