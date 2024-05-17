@@ -1,5 +1,4 @@
 import { it, describe, expect } from 'vitest';
-
 import { UserMock } from '../../../../src/core/structure/mocks/UserMock';
 import { TokenAuth } from '../../../../src/core/helpers/functions/token_auth';
 import { handler } from '../../../../src/modules/update_activity_status_canceled/app/update_activity_status_canceled_presenter';
@@ -11,9 +10,9 @@ describe("Update Activity Status Canceled Presenter", () => {
   const user_moderator = new UserMock().users[2];
 
   it("Should return a success message", async () => {
-    const activities = new ActivityMock().activities;
-    const activity = activities[0];
-    const token = (await new TokenAuth().generate_token(user_admin.id)).toString();
+    let activities = new ActivityMock().activities;
+    let activity = activities[0];
+    let token = (await new TokenAuth().generate_token(user_admin.id)).toString();
     const event = {
       headers: {
         Authorization: token,
@@ -31,7 +30,7 @@ describe("Update Activity Status Canceled Presenter", () => {
   });
 
   it("Should return a not found error", async () => {
-    const token = (await new TokenAuth().generate_token(user_admin.id)).toString();
+    let token = (await new TokenAuth().generate_token(user_admin.id)).toString();
     const event = {
       headers: {
         Authorization: token,
@@ -49,9 +48,9 @@ describe("Update Activity Status Canceled Presenter", () => {
   });
 
   it("Shouldn't update activity status if user is not an admin", async () => {
-    const activities = new ActivityMock().activities;
-    const activity = activities[0];
-    const token = (await new TokenAuth().generate_token(user_student.id)).toString();
+    let activities = new ActivityMock().activities;
+    let activity = activities[0];
+    let token = (await new TokenAuth().generate_token(user_student.id)).toString();
     const event = {
       headers: {
         Authorization: token,
