@@ -36,9 +36,14 @@ const presenter = new UpdateActivityStatusCanceledPresenter();
 const controller = new UpdateActivityStatusCanceledController(usecase, presenter);
 
 const handler = async (event: any) => {
-  const request = new HttpRequest(event);
-  const response = await controller.execute(request);
-  return response.to_json();
+  try {
+    const request = new HttpRequest(event);
+    const response = await controller.execute(request);
+    return response.to_json();
+  } catch (error) {
+    console.error('Error in handler:', error);
+    return new InternalServerError("An unexpected error occurred").to_json();
+  }
 };
 
 export { UpdateActivityStatusCanceledPresenter, handler };

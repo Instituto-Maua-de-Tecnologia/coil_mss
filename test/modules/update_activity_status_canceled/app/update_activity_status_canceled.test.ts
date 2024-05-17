@@ -1,8 +1,7 @@
 import { it, describe, expect } from 'vitest';
 import { UserMock } from '../../../../src/core/structure/mocks/UserMock';
 import { TokenAuth } from '../../../../src/core/helpers/functions/token_auth';
-import { ActivityRepoMock } from "../../../../src/core/repositories/mocks/ActivityRepoMock";
-import { handler } from "../../../../src/modules/update_activity_status_canceled/app/update_activity_status_canceled_presenter";
+import { handler } from '../../../../src/modules/update_activity_status_canceled/app/update_activity_status_canceled_presenter';
 import { ActivityMock } from '../../../../src/core/structure/mocks/ActivityMock';
 
 describe("Update Activity Status Canceled Presenter", () => {
