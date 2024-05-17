@@ -1,5 +1,9 @@
 import { OK, Unauthorized, Forbidden, NotFound, InternalServerError } from "../../../core/helpers/http/http_codes";
 import { UserNotAuthenticated, UserNotAllowed } from "../../../core/helpers/errors/ModuleError";
+import { UpdateActivityStatusCanceledUsecase } from "./update_activity_status_canceled_usecase";
+import { UpdateActivityStatusCanceledController } from "./update_activity_status_canceled_controller";
+import { Repository } from "../../../core/repositories/Repository";
+import { HttpRequest } from "../../../core/helpers/http/http_codes";
 
 class UpdateActivityStatusCanceledPresenter {
   present(activity) {
@@ -20,4 +24,18 @@ class UpdateActivityStatusCanceledPresenter {
   }
 }
 
-export { UpdateActivityStatusCanceledPresenter };
+const repository = new Repository({ user_repo: true, activity_repo: true });
+const userRepo = repository.UserRepo;
+const activityRepo = repository.ActivityRepo;
+
+const usecase = new UpdateActivityStatusCanceledUsecase(userRepo, activityRepo);
+const presenter = new UpdateActivityStatusCanceledPresenter();
+const controller = new UpdateActivityStatusCanceledController(usecase, presenter);
+
+const handler = async (event: any, context: any) => {
+  const request = new HttpRequest(event);
+  const response = await controller.execute(request);
+  return response.to_json();
+};
+
+export { UpdateActivityStatusCanceledPresenter, handler };
