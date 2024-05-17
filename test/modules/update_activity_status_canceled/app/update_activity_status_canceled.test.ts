@@ -22,7 +22,7 @@ describe("Update Activity Status Canceled Presenter", () => {
         activity_id: activity.id,
       }),
     };
-    const response = await handler(event, null);
+    const response = await handler(event);
     expect(response.statusCode).toBe(200);
     expect(JSON.parse(response.body).message).toBe("Activity status updated to CANCELED");
   });
@@ -37,7 +37,7 @@ describe("Update Activity Status Canceled Presenter", () => {
         activity_id: "invalid_id",
       }),
     };
-    const response = await handler(event, null);
+    const response = await handler(event);
     expect(response.statusCode).toBe(404);
     expect(JSON.parse(response.body).message).toBe("Activity not found");
   });
@@ -54,7 +54,7 @@ describe("Update Activity Status Canceled Presenter", () => {
         activity_id: activity.id,
       }),
     };
-    const response = await handler(event, null);
+    const response = await handler(event);
     expect(response.statusCode).toBe(403);
     expect(JSON.parse(response.body).message).toBe("User not allowed");
   });

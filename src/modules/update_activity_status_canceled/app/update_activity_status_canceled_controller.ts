@@ -16,6 +16,7 @@ class UpdateActivityStatusCanceledController {
       const activity = await this.usecase.execute(request.headers, request.body);
       return this.presenter.present(activity);
     } catch (error) {
+      console.error('Error executing UpdateActivityStatusCanceledController:', error);
       return this.presenter.handleError(error);
     }
   }
